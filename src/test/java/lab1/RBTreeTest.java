@@ -1,6 +1,6 @@
-package lab1.test.java;
+package lab1;
 
-import lab1.main.java.structures.RBTree;
+import lab1.structures.RBTree;
 import org.junit.Before;
 import org.junit.Test;
 

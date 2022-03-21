@@ -1,4 +1,4 @@
-package lab1.main.java.structures;
+package lab1.structures;
 
 import java.util.ArrayList;
 
@@ -127,12 +127,12 @@ public class RBTree <T extends Comparable<T>> {
             } else if (p != null && g != null) {
 
                 // Case 2. U is BLACK and P with G in different sides => go to case 3 after
-                if (g.left == p && p.right == node) leftRotate(g);
-                else if (g.right == p && p.left == node) rightRotate(g);
+                if (g.left == p && p.right == node) leftRotate(p);
+                else if (g.right == p && p.left == node) rightRotate(p);
 
                 // Case 3. U is BLACK and P with G on the same side
-                if (p.left == node && g.left == p) rightRotate(g);
-                else if (p.right == node && g.right == p) leftRotate(g);
+                if (p.left == node && g.left == p) rightRotate(p);
+                else if (p.right == node && g.right == p) leftRotate(p);
 
                 p.color = Color.BLACK;
                 g.color = Color.RED;
@@ -205,6 +205,8 @@ public class RBTree <T extends Comparable<T>> {
     }
 
     private void destroy(Node<T> node) {
+        if (node == root) root = null;
+
         if (node.parent != null) {
             if (node.parent.left == node) node.parent.left = null;
             else node.parent.right = null;

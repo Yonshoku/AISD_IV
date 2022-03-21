@@ -1,4 +1,4 @@
-package lab1.main.java.structures;
+package lab1.structures;
 
 import java.util.ArrayList;
 
@@ -17,7 +17,10 @@ public class Map <K extends Comparable<K>, V>{
     }
 
     public V find (K key) {
-        return tree.get(new Entry<K, V>(key, null)).getValue();
+        Entry<K, V> entry = tree.get(new Entry<K, V>(key, null));
+
+        if (entry != null) return entry.getValue();
+        return null;
     }
 
     public void clear() {

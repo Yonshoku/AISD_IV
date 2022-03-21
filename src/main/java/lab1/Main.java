@@ -1,6 +1,6 @@
-package lab1.main.java;
+package lab1;
 
-import lab1.main.java.structures.Map;
+import lab1.structures.Map;
 
 public class Main {
     public static void main(String[] args) {
