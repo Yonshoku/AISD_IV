@@ -33,7 +33,7 @@ public class List <T extends Comparable<T>> {
 
     public boolean contains(T key) {
         for (int i = 0; i < length; i++) {
-            if ((T) arr[i] == key) return true;
+            if (((T) arr[i]).compareTo(key) == 0) return true;
         }
 
         return false;
@@ -45,10 +45,24 @@ public class List <T extends Comparable<T>> {
 
     public int indexOf(T key) {
         for (int i = 0; i < length; i++) {
-            if ((T) arr[i] == key) return i;
+            if (((T) arr[i]).compareTo(key) == 0) return i;
         }
 
         return -1;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder str = new StringBuilder();
+
+        str.append("[");
+
+        for (int i = 0; i < length - 1; i++) {
+            str.append(arr[i] + ", ");
+        }
+        str.append(arr[length - 1] + "]");
+
+        return str.toString();
     }
 
 }
