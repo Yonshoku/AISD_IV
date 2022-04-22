@@ -1,15 +1,15 @@
 package lab2.structures;
 
 public class LinkedList<T extends Comparable<T>> {
-    Node first;
-    Node last;
+    Node<T> first;
+    Node<T> last;
 
     boolean isEmpty() {
         return first == null;
     }
 
     public int get_size() {
-        Node cur = first;
+        Node<T> cur = first;
         int size = 0;
 
         while (cur != null) {
@@ -21,7 +21,7 @@ public class LinkedList<T extends Comparable<T>> {
     }
 
     public T at(int index) {
-        Node cur = first;
+        Node<T> cur = first;
 
         if (first == null) throw new IndexOutOfBoundsException("List empty");
 
@@ -31,11 +31,11 @@ public class LinkedList<T extends Comparable<T>> {
             cur = cur.getNext();
         }
 
-        return (T) cur.getValue();
+        return cur.getValue();
     }
 
-    Node node_at(int index) {
-        Node cur = first;
+    public Node<T> node_at(int index) {
+        Node<T> cur = first;
 
         for (int i = 0; i < index; i++) {
             if (cur == null) return null;
@@ -46,8 +46,8 @@ public class LinkedList<T extends Comparable<T>> {
         return cur;
     }
 
-    void push_back(T value) {
-        Node newNode = new Node(value);
+    public void push_back(T value) {
+        Node<T> newNode = new Node<>(value);
 
         if (isEmpty()) {
             first = newNode;
@@ -59,8 +59,8 @@ public class LinkedList<T extends Comparable<T>> {
         }
     }
 
-    void push_front(T value) {
-        Node newNode = new Node(value);
+    public void push_front(T value) {
+        Node<T> newNode = new Node<>(value);
 
         if (isEmpty()) {
             first = newNode;
@@ -92,9 +92,9 @@ public class LinkedList<T extends Comparable<T>> {
         }
     }
 
-    void insert(int index, T value) {
-        Node insertBeforeTo = node_at(index);
-        Node toInsert = new Node(value);
+    public void insert(int index, T value) {
+        Node<T> insertBeforeTo = node_at(index);
+        Node<T> toInsert = new Node<>(value);
 
         if (insertBeforeTo == null) {
             throw new IndexOutOfBoundsException("Node with index " + index + " doesn't exist");
@@ -112,15 +112,15 @@ public class LinkedList<T extends Comparable<T>> {
 
     // It assumes that list sorted
     public void insertByPriority(T value) {
-        Node newNode = new Node(value);
-        Node curNode = first;
+        Node<T> newNode = new Node<>(value);
+        Node<T> curNode = first;
 
         if (first == null) {
             push_front(value);
             return;
         }
 
-        while (((T)newNode.getValue()).compareTo((T)curNode.getValue()) > 0) {
+        while (newNode.getValue().compareTo(curNode.getValue()) > 0) {
             if (curNode.getNext() != null) {
                 curNode = curNode.getNext();
             } else {
@@ -140,8 +140,8 @@ public class LinkedList<T extends Comparable<T>> {
 
     }
 
-    void remove(int index) {
-        Node toRemove = node_at(index);
+    public void remove(int index) {
+        Node<T> toRemove = node_at(index);
 
         if (toRemove == null) { // Node at this index doesn't exist
             return;
@@ -155,13 +155,13 @@ public class LinkedList<T extends Comparable<T>> {
         }
     }
 
-    void clear() {
+    public void clear() {
         first = null;
         last = null;
     }
 
-    void set(int index, T value) {
-        Node toSet = node_at(index);
+    public void set(int index, T value) {
+        Node<T> toSet = node_at(index);
 
         if (toSet != null) { // Index out of range
             toSet.setValue(value);
@@ -169,40 +169,53 @@ public class LinkedList<T extends Comparable<T>> {
     }
 
     void swap(int index1, int index2) {
-        Node node1 = node_at(index1);
-        Node node2 = node_at(index2);
+        Node<T> node1 = node_at(index1);
+        Node<T> node2 = node_at(index2);
 
         if (node1 != null && node2 != null) {
-            T temp = (T) node1.getValue();
+            T temp = node1.getValue();
             node1.setValue(node2.getValue());
             node2.setValue(temp);
         }
     }
 
-    public Node getFirstNode() {
+    public Node<T> getFirstNode() {
         return first;
     }
 
-    public Node getLastNode() {
+    public Node<T> getLastNode() {
         return last;
     }
 
-    T getLast() {
-        if (last != null) return (T) last.getValue();
+    public T getLast() {
+        if (last != null) return last.getValue();
         return null;
     }
 
-    T getFirst() {
-        if (first != null) return (T) first.getValue();
+    public T getFirst() {
+        if (first != null) return first.getValue();
         return null;
     }
 
+    public boolean contains(T value) {
+        Node<T> node = first;
+
+        if (first != null && first.getValue().compareTo(value) == 0)
+            return true;
+
+        while(node.getNext() != null) {
+            node = node.getNext();
+            if (node.getValue().compareTo(value) == 0) return true;
+        }
+
+        return false;
+    }
 }
 
 class Node<T> {
     T value;
-    Node next = null;
-    Node prev = null;
+    Node<T> next = null;
+    Node<T> prev = null;
 
     public Node(T value) {
         this.value = value;
@@ -212,11 +225,11 @@ class Node<T> {
         return value;
     }
 
-    public Node getNext() {
+    public Node<T> getNext() {
         return next;
     }
 
-    public void setNext(Node next) {
+    public void setNext(Node<T> next) {
         this.next = next;
     }
 
@@ -224,11 +237,11 @@ class Node<T> {
         this.value = value;
     }
 
-    public Node getPrev() {
+    public Node<T> getPrev() {
         return prev;
     }
 
-    public void setPrev(Node prev) {
+    public void setPrev(Node<T> prev) {
         this.prev = prev;
     }
 }

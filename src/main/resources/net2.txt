@@ -1,0 +1,10 @@
+S B 3
+S C 9
+B C 9
+B D 6
+B E 5
+B T 5
+D T 3
+C T 6
+C E 1
+E T 9

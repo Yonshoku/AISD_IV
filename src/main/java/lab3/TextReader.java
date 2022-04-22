@@ -16,7 +16,6 @@ public class TextReader {
 
         while (sc.hasNext()) {
             text.append(sc.next());
-            text.append(';');
         }
 
         return text.toString();

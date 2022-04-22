@@ -1,0 +1,5 @@
+Saint-Petersburg;Moscow;5;10
+Saint-Petersburg;Kaliningrad;40;N/A
+Kaliningrad;Moscow;100;20
+Sofia;Saint-Petersburg;100;10
+Sofia;Moscow;100;N/A

@@ -51,6 +51,15 @@ public class List <T extends Comparable<T>> {
         return -1;
     }
 
+    public void remove(int index) {
+        // Shift everything after this element left by 1
+        for (int i = index; i < length - 1; i++) {
+            arr[i] = arr[i + 1];
+        }
+
+        length--;
+    }
+
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();
